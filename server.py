@@ -147,7 +147,7 @@ def message_handler(event):
             return
 
     bot_input = chatterbot.get_response(message)
-    if 'do you feel' in bot_input.lower():
+    if 'do you feel' in str(bot_input).lower():
         page.send(sender_id, 'Good')
     else:
         page.send(sender_id, str(bot_input))
