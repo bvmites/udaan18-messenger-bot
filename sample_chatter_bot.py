@@ -1,3 +1,6 @@
+# from chatterbot import ChatBot
+# from chatterbot.trainers import ChatterBotCorpusTrainer
+
 # chatterbot = ChatBot("Training Example")
 # chatterbot.set_trainer(ChatterBotCorpusTrainer)
 #

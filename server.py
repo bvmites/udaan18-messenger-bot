@@ -1,11 +1,12 @@
 import json
 import os
 
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 from fbmq import Page
 from flask import Flask, request
 
 from helper import *
-from sample_chatter_bot import *
 
 
 def prepare_data():
