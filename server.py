@@ -1,4 +1,5 @@
 import json
+import os
 
 from fbmq import Page
 from flask import Flask, request
@@ -43,7 +44,9 @@ chatterbot = ChatBot("Training Example")
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
 
 app = Flask(__name__)
-page = Page(CONFIG['FACEBOOK_TOKEN'])
+ACCESS_TOKEN = os.environ('ACCESS_TOKEN')
+VERIFY_TOKEN = os.environ('VERIFY_TOKEN')
+page = Page(ACCESS_TOKEN)
 
 raw_data, data = prepare_data()
 
@@ -62,7 +65,7 @@ def start_callback(payload, event):
 def validate():
     if request.method == 'GET':
         if request.args.get('hub.mode', '') == 'subscribe' and \
-                request.args.get('hub.verify_token', '') == CONFIG['VERIFY_TOKEN']:
+                request.args.get('hub.verify_token', '') == VERIFY_TOKEN:
 
             print("Validating webhook")
             return request.args.get('hub.challenge', '')
@@ -82,6 +85,7 @@ def message_handler(event):
     message_handled = 0
     categories_list = ['info', 'categories', 'category', 'details']
     reach_us_list = ['navigate', 'reach', 'map', 'bvm', 'birla', 'vishvakarma', 'mahavidyalaya', 'college']
+
     if 'when' in message.lower() and 'udaan' in message.lower():
         page.send(sender_id, '2nd, 3rd and 4th April, 2018 :)')
         page.send(sender_id, 'We look forward to seeing you there')
@@ -145,7 +149,8 @@ def message_handler(event):
         if keyword.lower() in message.lower():
             click_persistent_menu(payload='PMENU_' + 'Information', event=event)
             return
-
+    if 'fine' in message.lower():
+        page.send(sender_id, 'Good')
     bot_input = chatterbot.get_response(message)
     if 'do you feel' in str(bot_input).lower():
         page.send(sender_id, 'Good')
