@@ -45,8 +45,8 @@ chatterbot = ChatBot("Training Example")
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
 
 app = Flask(__name__)
-ACCESS_TOKEN = os.environ('ACCESS_TOKEN')
-VERIFY_TOKEN = os.environ('VERIFY_TOKEN')
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 page = Page(ACCESS_TOKEN)
 
 raw_data, data = prepare_data()
