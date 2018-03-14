@@ -1,0 +1,8 @@
+ChatterBot==0.8.4
+chatterbot-corpus==1.1.1
+fbmq==2.4.4
+Flask==0.12.2
+Flask-MySQL==1.4.0
+Flask-RESTful==0.3.6
+jsonschema==2.6.0
+gunicorn==19.7.1
