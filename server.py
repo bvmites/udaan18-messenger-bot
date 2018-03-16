@@ -10,15 +10,21 @@ from helper import *
 
 
 def prepare_data():
+    """
+    Parses events JSON
+    :return: parsed JSON as a python dict, dict of menu items
+    """
     raw = json.load(open('Events_json.json'))
     menu_data = []
     temp_list = []
+
     # Menu 1
     for key in raw:
         temp_list.append(key)
 
     menu_data.append(temp_list)
     temp1_list = []
+
     # Menu 2
     for key in raw:
         temp_list = []
@@ -82,6 +88,9 @@ def validate():
 def message_handler(event):
     sender_id = event.sender_id
     message = event.message_text
+
+    if message is None:
+        return
 
     message_handled = 0
     categories_list = ['info', 'categories', 'category', 'details']
