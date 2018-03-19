@@ -84,6 +84,56 @@ def validate():
         return "ok"
 
 
+def social_media_handle(message, sender_id):
+    """
+    Handles Social Media Keywords
+    :param message: message from user
+    :param sender_id: users id
+    :return: 0 if keyword not found, else 1
+    """
+    if 'website' in message.lower():
+        page.send(sender_id, Template.Generic([
+            Template.GenericElement(title='Udaan18 Website',
+                                    subtitle='The euphoric leap',
+                                    image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Visit Website', 'https://udaan18.com/')
+                                    ])
+        ]))
+        return 1
+    if 'insta' in message.lower():
+        page.send(sender_id, Template.Generic([
+            Template.GenericElement(title='Udaan18 Instagram',
+                                    subtitle='The euphoric leap',
+                                    image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Visit', 'https://instagram.com/teamudaan')
+                                    ])
+        ]))
+        return 1
+    if 'twitter' in message.lower():
+        page.send(sender_id, Template.Generic([
+            Template.GenericElement(title='Udaan18 Twitter',
+                                    subtitle='The euphoric leap',
+                                    image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Visit', 'https://twitter.com/teamudaan')
+                                    ])
+        ]))
+        return 1
+    if 'github' in message.lower():
+        page.send(sender_id, Template.Generic([
+            Template.GenericElement(title='Udaan18 Github',
+                                    subtitle='The euphoric leap',
+                                    image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Visit', 'https://github.com/bvmites')
+                                    ])
+        ]))
+        return 1
+    return 0
+
+
 @page.handle_message
 def message_handler(event):
     sender_id = event.sender_id
@@ -96,46 +146,10 @@ def message_handler(event):
     categories_list = ['info', 'categories', 'category', 'details']
     reach_us_list = ['navigate', 'reach', 'map', 'bvm', 'birla', 'vishvakarma', 'mahavidyalaya', 'college']
 
-    if 'website' in message.lower():
-        page.send(sender_id, Template.Generic([
-            Template.GenericElement(title='Udaan18 Website',
-                                    subtitle='The euphoric leap',
-                                    image_url=CONFIG['UDAAN_URL'],
-                                    buttons=[
-                                        Template.ButtonWeb('Visit Website', 'https://udaan18.com/')
-                                    ])
-        ]))
+    # Handle Social Media Queries
+    if social_media_handle(message, sender_id) == 1:
         return
-    if 'insta' in message.lower():
-        page.send(sender_id, Template.Generic([
-            Template.GenericElement(title='Udaan18 Instagram',
-                                    subtitle='The euphoric leap',
-                                    image_url=CONFIG['UDAAN_URL'],
-                                    buttons=[
-                                        Template.ButtonWeb('Visit', 'https://instagram.com/teamudaan')
-                                    ])
-        ]))
-        return
-    if 'twitter' in message.lower():
-        page.send(sender_id, Template.Generic([
-            Template.GenericElement(title='Udaan18 Twitter',
-                                    subtitle='The euphoric leap',
-                                    image_url=CONFIG['UDAAN_URL'],
-                                    buttons=[
-                                        Template.ButtonWeb('Visit', 'https://twitter.com/teamudaan')
-                                    ])
-        ]))
-        return
-    if 'github' in message.lower():
-        page.send(sender_id, Template.Generic([
-            Template.GenericElement(title='Udaan18 Github',
-                                    subtitle='The euphoric leap',
-                                    image_url=CONFIG['UDAAN_URL'],
-                                    buttons=[
-                                        Template.ButtonWeb('Visit', 'https://github.com/bvmites')
-                                    ])
-        ]))
-        return
+
     if 'when' in message.lower() and 'udaan' in message.lower():
         page.send(sender_id, '2nd, 3rd and 4th April, 2018 :)')
         page.send(sender_id, 'We look forward to seeing you there')
