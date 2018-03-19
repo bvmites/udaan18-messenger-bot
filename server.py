@@ -206,8 +206,8 @@ def message_handler(event):
         else:
             print(bot_input)
             page.send(sender_id, str(bot_input))
-    except Exception:
-        print('An error occured')
+    except Exception as e:
+        print(e)
         page.send(event.sender_id, 'Hello')
 
 @page.callback(['CATEGORY__(.+)'])
