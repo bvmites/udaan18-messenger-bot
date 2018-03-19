@@ -3,8 +3,6 @@ import json
 
 from fbmq import QuickReply, Template
 
-from CONFIG import CONFIG
-
 
 def prepare_data():
     """
@@ -184,7 +182,10 @@ def callback_picked_dept(payload, event, data, raw_data, page):
             generic_template.append(Template.GenericElement(event,
                                                             subtitle=data[1][tech_idx][dept_idx] + ' - ' +
                                                                      raw_data['technical'][dept_idx]['alis'],
-                                                            image_url=CONFIG['UDAAN_URL'],
+                                                            image_url=get_icon_from_name(raw_data['technical'][dept_idx]
+                                                                                         ['events'][
+                                                                                             data[2][dept_idx].index(
+                                                                                                 event)]['name']),
                                                             buttons=[
                                                                 Template.ButtonPhoneNumber("Contact", '+91' +
                                                                                            raw_data['technical'][
@@ -216,7 +217,9 @@ def callback_picked_category(payload, event, data, raw_data, page):
         for event in data[1][idx]:
             generic_template.append(Template.GenericElement(event,
                                                             subtitle=message,
-                                                            image_url=CONFIG['UDAAN_URL'],
+                                                            image_url=get_icon_from_name(
+                                                                raw_data[message][data[1][idx].index(
+                                                                    event)]['name']),
                                                             buttons=[
                                                                 Template.ButtonPhoneNumber("Contact", '+91' +
                                                                                            raw_data[message][

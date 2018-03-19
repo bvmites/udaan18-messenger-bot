@@ -25,7 +25,10 @@ page.show_persistent_menu([Template.ButtonPostBack('Information', 'PMENU_' + 'In
 
 @page.callback(['START_PAYLOAD'])
 def start_callback(payload, event):
-    page.send(event.sender_id, "Welcome to Udaan 2018! Write down info to get information about various events")
+    page.send(event.sender_id, "Welcome to Udaan 2018! Write down info to get information about various events.")
+
+    page.send(event.sender_id, "Find details of individuals events: \"Give me details of Hardwizard \"")
+    page.send(event.sender_id, "Find list of events: \"tech events\"")
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -189,10 +192,10 @@ def message_handler(event):
             return
     if 'fine' in message.lower():
         page.send(sender_id, 'Good')
+        return
     bot_input = chatterbot.get_response(message)
     if 'do you feel' in str(bot_input).lower():
         page.send(sender_id, 'Good')
-        return
     else:
         print(bot_input)
         page.send(sender_id, str(bot_input))
@@ -245,4 +248,4 @@ def click_persistent_menu(payload, event):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(threaded=True)
