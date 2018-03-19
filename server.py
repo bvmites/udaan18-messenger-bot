@@ -197,8 +197,9 @@ def message_handler(event):
 
     # For displaying info related to categories
     for category in data[0]:
-        if category.lower() in message.lower():
-            if category.lower() == 'technical' and 'non' in message.lower():
+        if category.lower() in message.lower() or 'tech' in message.lower():
+            if (category.lower() == 'technical' and 'non' in message.lower()) \
+                    or message.lower() in ['nontech', 'non-tech']:
                 callback_picked_category(payload='CATEGORY__non-technical', event=event, data=data, raw_data=raw_data,
                                          page=page)
             else:
