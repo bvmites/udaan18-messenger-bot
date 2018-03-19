@@ -100,9 +100,39 @@ def message_handler(event):
         page.send(sender_id, Template.Generic([
             Template.GenericElement(title='Udaan18 Website',
                                     subtitle='The euphoric leap',
-                                    # image_url=CONFIG['UDAAN_URL'],
+                                    image_url=CONFIG['UDAAN_URL'],
                                     buttons=[
                                         Template.ButtonWeb('Visit Website', 'https://udaan18.com/')
+                                    ])
+        ]))
+        return
+    if 'insta' in message.lower():
+        page.send(sender_id, Template.Generic([
+            Template.GenericElement(title='Udaan18 Instagram',
+                                    subtitle='The euphoric leap',
+                                    image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Visit', 'https://instagram.com/teamudaan')
+                                    ])
+        ]))
+        return
+    if 'twitter' in message.lower():
+        page.send(sender_id, Template.Generic([
+            Template.GenericElement(title='Udaan18 Twitter',
+                                    subtitle='The euphoric leap',
+                                    image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Visit', 'https://twitter.com/teamudaan')
+                                    ])
+        ]))
+        return
+    if 'github' in message.lower():
+        page.send(sender_id, Template.Generic([
+            Template.GenericElement(title='Udaan18 Github',
+                                    subtitle='The euphoric leap',
+                                    image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Visit', 'https://github.com/bvmites')
                                     ])
         ]))
         return
