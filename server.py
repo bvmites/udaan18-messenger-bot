@@ -197,15 +197,23 @@ def message_handler(event):
 
     # For displaying info related to categories
     for category in data[0]:
-        if category.lower() in message.lower() or 'tech' in message.lower():
-            if (category.lower() == 'technical' and 'non' in message.lower()) \
-                    or message.lower() in ['nontech', 'non-tech']:
+        if category.lower() in message.lower():
+            if category.lower() == 'technical' and 'non' in message.lower():
                 callback_picked_category(payload='CATEGORY__non-technical', event=event, data=data, raw_data=raw_data,
                                          page=page)
             else:
                 callback_picked_category(payload='CATEGORY__' + category, event=event, data=data, raw_data=raw_data,
                                          page=page)
             return
+    non_tech_keywords = ['non-tech', 'nontech']
+    for non_tech_keyword in non_tech_keywords:
+        for non_tech_keyword in message.lower():
+            callback_picked_category(payload='CATEGORY__non-technical', event=event, data=data, raw_data=raw_data,
+                                     page=page)
+    if 'tech' in message.lower():
+        callback_picked_category(payload='CATEGORY__technical', event=event, data=data, raw_data=raw_data,
+                                 page=page)
+
     # Reach us
     for keyword in reach_us_list:
         if keyword.lower() in message.lower():
