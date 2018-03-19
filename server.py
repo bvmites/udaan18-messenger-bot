@@ -149,10 +149,12 @@ def message_handler(event):
     # Handle Social Media Queries
     if social_media_handle(message, sender_id) == 1:
         return
-
-    if 'when' in message.lower() and 'udaan' in message.lower():
+    if ('when' in message.lower() and 'udaan' in message.lower()) or message.lower() == 'when':
         page.send(sender_id, '2nd, 3rd and 4th April, 2018 :)')
         page.send(sender_id, 'We look forward to seeing you there')
+        return
+    if ('where' in message.lower() and 'udaan' in message.lower()) or message.lower() == 'where':
+        click_persistent_menu(payload='PMENU_' + 'map', event=event)
         return
     if message.lower() in 'hey hello hi there hey there':
         page.send(sender_id, 'Hey there! How you doing?')
