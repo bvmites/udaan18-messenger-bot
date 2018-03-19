@@ -48,7 +48,6 @@ def map_icon_list():
 
     for filename in glob.iglob('./logos/**/*.png', recursive=True):
         files_names_list.append('https://raw.githubusercontent.com/bvmites/udaan18-messenger-bot/master' + filename[1:])
-    print(files_names_list)
     event_names_list = []
     # All dept events
     for dept in data[2]:
@@ -214,21 +213,34 @@ def callback_picked_category(payload, event, data, raw_data, page):
     else:
         generic_template = []
         i = 1
-        for event in data[1][idx]:
-            generic_template.append(Template.GenericElement(event,
-                                                            subtitle=message,
-                                                            image_url=get_icon_from_name(
-                                                                raw_data[message][data[1][idx].index(
-                                                                    event)]['name']),
-                                                            buttons=[
-                                                                Template.ButtonPhoneNumber("Contact", '+91' +
-                                                                                           raw_data[message][
-                                                                                               data[1][idx].index(
-                                                                                                   event)]['managers'][
-                                                                                               0]['phone']),
-                                                                Template.ButtonPostBack('Details', "OTHER_" + event)
-                                                            ]))
-            i += 1
+        if message.lower() == 'adventure':
+            for event in data[1][idx]:
+                generic_template.append(Template.GenericElement(event,
+                                                                subtitle=message,
+                                                                image_url=get_icon_from_name(
+                                                                    raw_data[message][data[1][idx].index(
+                                                                        event)]['name']),
+                                                                buttons=[
+                                                                    Template.ButtonPostBack('Details', "OTHER_" + event)
+                                                                ]))
+                i += 1
+        else:
+            for event in data[1][idx]:
+                generic_template.append(Template.GenericElement(event,
+                                                                subtitle=message,
+                                                                image_url=get_icon_from_name(
+                                                                    raw_data[message][data[1][idx].index(
+                                                                        event)]['name']),
+                                                                buttons=[
+                                                                    Template.ButtonPhoneNumber("Contact", '+91' +
+                                                                                               raw_data[message][
+                                                                                                   data[1][idx].index(
+                                                                                                       event)][
+                                                                                                   'managers'][
+                                                                                                   0]['phone']),
+                                                                    Template.ButtonPostBack('Details', "OTHER_" + event)
+                                                                ]))
+                i += 1
         if i > 20:
             page.send(sender_id, Template.Generic([generic_template[z] for z in range(0, 10)]))
             page.send(sender_id, Template.Generic([generic_template[z] for z in range(10, 20)]))
