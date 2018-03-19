@@ -182,8 +182,9 @@ def message_handler(event):
         return
 
     # For displaying department events
-    for dept in data[1][data[0].index('technical')]:
+    for dept_idx, dept in enumerate(data[1][data[0].index('technical')], 0):
         dept_list = dept.split('/')
+        dept_list.append(raw_data['technical'][dept_idx]['alias'])
         if dept == 'ec/el':
             dept_list = ['electronics', 'communication']
         if dept == 'computer/it':
