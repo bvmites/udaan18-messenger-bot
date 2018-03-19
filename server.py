@@ -96,6 +96,16 @@ def message_handler(event):
     categories_list = ['info', 'categories', 'category', 'details']
     reach_us_list = ['navigate', 'reach', 'map', 'bvm', 'birla', 'vishvakarma', 'mahavidyalaya', 'college']
 
+    if 'website' in message.lower():
+        page.send(sender_id, Template.Generic([
+            Template.GenericElement(title='Udaan18 Website',
+                                    subtitle='The euphoric leap',
+                                    # image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Visit Website', 'https://udaan18.com/')
+                                    ])
+        ]))
+        return
     if 'when' in message.lower() and 'udaan' in message.lower():
         page.send(sender_id, '2nd, 3rd and 4th April, 2018 :)')
         page.send(sender_id, 'We look forward to seeing you there')
