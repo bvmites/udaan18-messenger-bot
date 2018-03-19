@@ -192,9 +192,9 @@ def message_handler(event):
     bot_input = chatterbot.get_response(message)
     if 'do you feel' in str(bot_input).lower():
         page.send(sender_id, 'Good')
+        return
     else:
-        page.send(sender_id, str(bot_input))
-
+        page.send(recipient_id=sender_id, message=str(bot_input))
 
 @page.callback(['CATEGORY__(.+)'])
 def callback_picked_genre(payload, event):
