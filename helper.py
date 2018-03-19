@@ -1,6 +1,46 @@
+import json
+
 from fbmq import QuickReply, Template
 
 from CONFIG import CONFIG
+
+
+def prepare_data():
+    """
+    Parses events JSON
+    :return: parsed JSON as a python dict, dict of menu items
+    """
+    raw = json.load(open('Events_json.json'))
+    menu_data = []
+    temp_list = []
+
+    # Menu 1
+    for key in raw:
+        temp_list.append(key)
+
+    menu_data.append(temp_list)
+    temp1_list = []
+
+    # Menu 2
+    for key in raw:
+        temp_list = []
+        for event in raw[key]:
+            temp_list.append(event['name'])
+        temp1_list.append(temp_list)
+
+    menu_data.append(temp1_list)
+
+    temp1_list = []
+
+    # Menu 3
+    for dept in raw['technical']:
+        temp_list = []
+        for event in dept['events']:
+            temp_list.append(event['name'])
+        temp1_list.append(temp_list)
+
+    menu_data.append(temp1_list)
+    return raw, menu_data
 
 
 def display_categories(sender_id, data, page):

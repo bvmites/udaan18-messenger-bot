@@ -1,4 +1,3 @@
-import json
 import os
 
 from chatterbot import ChatBot
@@ -7,45 +6,6 @@ from fbmq import Page
 from flask import Flask, request
 
 from helper import *
-
-
-def prepare_data():
-    """
-    Parses events JSON
-    :return: parsed JSON as a python dict, dict of menu items
-    """
-    raw = json.load(open('Events_json.json'))
-    menu_data = []
-    temp_list = []
-
-    # Menu 1
-    for key in raw:
-        temp_list.append(key)
-
-    menu_data.append(temp_list)
-    temp1_list = []
-
-    # Menu 2
-    for key in raw:
-        temp_list = []
-        for event in raw[key]:
-            temp_list.append(event['name'])
-        temp1_list.append(temp_list)
-
-    menu_data.append(temp1_list)
-
-    temp1_list = []
-
-    # Menu 3
-    for dept in raw['technical']:
-        temp_list = []
-        for event in dept['events']:
-            temp_list.append(event['name'])
-        temp1_list.append(temp_list)
-
-    menu_data.append(temp1_list)
-    return raw, menu_data
-
 
 chatterbot = ChatBot("Training Example")
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
