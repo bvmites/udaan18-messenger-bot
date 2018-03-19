@@ -194,7 +194,9 @@ def message_handler(event):
         page.send(sender_id, 'Good')
         return
     else:
-        page.send(recipient_id=sender_id, message=str(bot_input))
+        print(bot_input)
+        page.send(recipient_id=sender_id, message=str(bot_input).encode(encoding='UTF-8', errors='strict'))
+
 
 @page.callback(['CATEGORY__(.+)'])
 def callback_picked_genre(payload, event):
