@@ -160,6 +160,8 @@ def message_handler(event):
                 dept_list.append("Dynamo-Bombers")
                 dept_list.append("dynamo bombers")
                 dept_list.append('dynamobombers')
+            if dept == 'civil':
+                dept_list.append('inframaniacs')
             for mdept in dept_list:
                 if mdept.lower() in message.lower():
                     callback_picked_dept(payload='PICK_' + dept, event=event, data=data, raw_data=raw_data, page=page)
