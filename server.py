@@ -193,6 +193,9 @@ def message_handler(event):
             if keyword.lower() in message.lower():
                 click_persistent_menu(payload='PMENU_' + 'Information', event=event)
                 return
+        # udaan
+        if 'udaan' in message.lower():
+            start_callback('START_PAYLOAD', event=event)
         if 'fine' in message.lower():
             page.send(sender_id, 'Good')
             return
