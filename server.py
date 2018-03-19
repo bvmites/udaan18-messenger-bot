@@ -210,9 +210,11 @@ def message_handler(event):
         if non_tech_keyword in message.lower():
             callback_picked_category(payload='CATEGORY__non-technical', event=event, data=data, raw_data=raw_data,
                                      page=page)
+            return
     if 'tech' in message.lower():
         callback_picked_category(payload='CATEGORY__technical', event=event, data=data, raw_data=raw_data,
                                  page=page)
+        return
 
     # Reach us
     for keyword in reach_us_list:
