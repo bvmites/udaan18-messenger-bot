@@ -97,7 +97,7 @@ def social_media_handle(message, sender_id):
                                     subtitle='The euphoric leap',
                                     image_url=CONFIG['UDAAN_URL'],
                                     buttons=[
-                                        Template.ButtonWeb('Visit Website', 'https://udaan18.com/')
+                                        Template.ButtonWeb('Visit Website', CONFIG['UDAAN_WEBSITE'])
                                     ])
         ]))
         return 1
@@ -107,7 +107,7 @@ def social_media_handle(message, sender_id):
                                     subtitle='The euphoric leap',
                                     image_url=CONFIG['UDAAN_URL'],
                                     buttons=[
-                                        Template.ButtonWeb('Visit', 'https://instagram.com/teamudaan')
+                                        Template.ButtonWeb('Visit', CONFIG['UDAAN_INSTA'])
                                     ])
         ]))
         return 1
@@ -117,7 +117,7 @@ def social_media_handle(message, sender_id):
                                     subtitle='The euphoric leap',
                                     image_url=CONFIG['UDAAN_URL'],
                                     buttons=[
-                                        Template.ButtonWeb('Visit', 'https://twitter.com/teamudaan')
+                                        Template.ButtonWeb('Visit', CONFIG['UDAAN_TWITTER'])
                                     ])
         ]))
         return 1
@@ -127,7 +127,7 @@ def social_media_handle(message, sender_id):
                                     subtitle='The euphoric leap',
                                     image_url=CONFIG['UDAAN_URL'],
                                     buttons=[
-                                        Template.ButtonWeb('Visit', 'https://github.com/bvmites')
+                                        Template.ButtonWeb('Visit', CONFIG['UDAAN_GITHUB'])
                                     ])
         ]))
         return 1
@@ -255,7 +255,14 @@ def click_persistent_menu(payload, event):
                                     image_url=CONFIG['BVM_LOGO'],
                                     buttons=[
                                         Template.ButtonWeb("Navigate", CONFIG['BVM_ADDRESS'])]
-                                    )]))
+                                    ),
+            Template.GenericElement(title='Contact Us', subtitle='', image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
+                                        Template.ButtonWeb('Website', CONFIG['UDAAN_WEBSITE']),
+                                        Template.ButtonWeb('Instagram', CONFIG['UDAAN_INSTA']),
+                                        Template.ButtonWeb('Twitter', CONFIG['UDAAN_TWITTER']),
+                                        Template.ButtonWeb('Github', CONFIG['UDAAN_GITHUB'])
+                                    ])]))
 
 
 if __name__ == '__main__':
