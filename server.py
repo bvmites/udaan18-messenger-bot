@@ -123,6 +123,7 @@ def message_handler(event):
             return
         if message.lower() in 'hey hello hi there hey there':
             page.send(sender_id, 'Hey there! How you doing?')
+            start_callback('START_PAYLOAD', event=event)
             return
         # For handling inputs related to tech events
         for tech_dept in data[2]:
