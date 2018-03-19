@@ -105,7 +105,8 @@ def callback_picked_dept(payload, event, data, raw_data, page):
         generic_template = []
         for event in data[2][dept_idx]:
             generic_template.append(Template.GenericElement(event,
-                                                            subtitle=data[1][tech_idx][dept_idx],
+                                                            subtitle=data[1][tech_idx][dept_idx] + ' - ' +
+                                                                     raw_data['technical'][dept_idx]['alis'],
                                                             image_url=CONFIG['UDAAN_URL'],
                                                             buttons=[
                                                                 Template.ButtonPhoneNumber("Contact", '+91' +
