@@ -196,7 +196,6 @@ def message_handler(event):
         # udaan
         if 'udaan' in message.lower():
             start_callback('START_PAYLOAD', event=event)
-            return
         if 'fine' in message.lower():
             page.send(sender_id, 'Good')
             return
