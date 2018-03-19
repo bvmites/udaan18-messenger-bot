@@ -260,9 +260,13 @@ def click_persistent_menu(payload, event):
                                     buttons=[
                                         Template.ButtonWeb('Website', CONFIG['UDAAN_WEBSITE']),
                                         Template.ButtonWeb('Instagram', CONFIG['UDAAN_INSTA']),
+                                    ]),
+            Template.GenericElement(title='Contact Us', subtitle='', image_url=CONFIG['UDAAN_URL'],
+                                    buttons=[
                                         Template.ButtonWeb('Twitter', CONFIG['UDAAN_TWITTER']),
-                                        Template.ButtonWeb('Github', CONFIG['UDAAN_GITHUB'])
-                                    ])]))
+                                        Template.ButtonWeb('Github', CONFIG['UDAAN_GITHUB']),
+                                    ])
+        ]))
 
 
 if __name__ == '__main__':
