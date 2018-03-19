@@ -49,7 +49,8 @@ def map_icon_list():
     files_names_list = []
 
     for filename in glob.iglob('./logos/**/*.png', recursive=True):
-        files_names_list.append('https://github.com/bvmites/udaan18-messenger-bot/blob/master' + filename[1:-1])
+        files_names_list.append(
+            'https://raw.githubusercontent.com/bvmites/udaan18-messenger-bot/master' + filename[1:-1])
 
     event_names_list = []
     # All dept events
