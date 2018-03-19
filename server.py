@@ -207,7 +207,7 @@ def message_handler(event):
             return
     non_tech_keywords = ['non-tech', 'nontech']
     for non_tech_keyword in non_tech_keywords:
-        for non_tech_keyword in message.lower():
+        if non_tech_keyword in message.lower():
             callback_picked_category(payload='CATEGORY__non-technical', event=event, data=data, raw_data=raw_data,
                                      page=page)
     if 'tech' in message.lower():
