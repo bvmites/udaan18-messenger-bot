@@ -194,6 +194,12 @@ def message_handler(event):
                 callback_picked_category(payload='CATEGORY__cultural', event=event, data=data, raw_data=raw_data,
                                          page=page)
                 return
+        girls_keywords = ['fab famina', 'fabfamina']
+        for girls_keyword in girls_keywords:
+            if girls_keyword in message.lower():
+                callback_picked_category(payload='CATEGORY__girls', event=event, data=data, raw_data=raw_data,
+                                         page=page)
+                return
         adventure_keywords = ['Diagon Alley', 'diagonalley']
         for adventure_keyword in adventure_keywords:
             if adventure_keyword in message.lower():
