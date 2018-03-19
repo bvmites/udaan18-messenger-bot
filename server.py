@@ -16,7 +16,7 @@ VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 page = Page(ACCESS_TOKEN)
 
 raw_data, data = prepare_data()
-
+zipped = map_icon_list()
 page.show_starting_button("START_PAYLOAD")
 
 page.show_persistent_menu([Template.ButtonPostBack('Information', 'PMENU_' + 'Information'),

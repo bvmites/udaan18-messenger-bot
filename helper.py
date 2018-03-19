@@ -1,3 +1,4 @@
+import glob
 import json
 
 from fbmq import QuickReply, Template
@@ -43,6 +44,43 @@ def prepare_data():
     return raw, menu_data
 
 
+def map_icon_list():
+    raw_data, data = prepare_data()
+    files_names_list = []
+
+    for filename in glob.iglob('./logos/**/*.png', recursive=True):
+        print(filename)
+        files_names_list.append(filename)
+
+    event_names_list = []
+    # All dept events
+    for dept in data[2]:
+        for event_name in dept:
+            event_names_list.append(event_name)
+
+    # Other events
+    for z, category in enumerate(data[1], 0):
+        if z == data[0].index('technical'):  # Ignore technical events
+            continue
+        for event_name in category:
+            event_names_list.append(event_name)
+
+    # Sort both the lists
+
+    event_names_list = sorted(event_names_list, key=str.lower)
+    files_names_list = sorted(files_names_list, key=lambda x: x.split('/')[-1].lower())
+
+    zipped = list(zip(event_names_list, files_names_list))
+    return zipped
+
+
+def get_icon_from_name(event_name):
+    zipped = map_icon_list()
+    for event in zipped:
+        if event[0] == event_name:
+            return event[1]
+
+
 def display_categories(sender_id, data, page):
     quick_replies = []
     for category in data[0]:
@@ -77,7 +115,7 @@ def callback_clicked_other(payload, event, data, raw_data, page):
         round_str += 'Round ' + str(n) + ':'
         round_str += '\n' + str(round) + '\n\n'
     generic_list = [Template.GenericElement(title=event_raw_data['name'], subtitle=event_raw_data['tagline'],
-                                            image_url=CONFIG['UDAAN_URL']),
+                                            image_url=get_icon_from_name(event_raw_data['name'])),
                     Template.GenericElement(title='Entry Fee: ', subtitle=event_raw_data['fees'])]
     managers = [Template.ButtonPhoneNumber("Call Manager", "+91" + str(event_raw_data['managers'][i]['phone']))
                 for i in range(0, len(event_raw_data['managers'])) if i < 1]
@@ -116,7 +154,7 @@ def callback_clicked_tech(payload, event, data, raw_data, page):
         round_str += '\n' + str(my_round) + '\n\n'
 
     generic_list = [Template.GenericElement(title=event_raw_data['name'], subtitle=event_raw_data['tagline'],
-                                            image_url=CONFIG['UDAAN_URL']),
+                                            image_url=get_icon_from_name(event_raw_data['name'])),
                     Template.GenericElement(title='Entry Fee: ', subtitle=event_raw_data['fees'])]
 
     if len(event_raw_data['managers']) == 0:  # If no manager exists
@@ -124,7 +162,7 @@ def callback_clicked_tech(payload, event, data, raw_data, page):
     else:
         managers = [Template.ButtonPhoneNumber("Call Manager", "+91" + str(event_raw_data['managers'][i]['phone']))
                     for i in range(0, len(event_raw_data['managers'])) if i < 1]
-        send_str = round_str
+    send_str = round_str
 
     page.send(sender_id, Template.List(
         elements=generic_list,
