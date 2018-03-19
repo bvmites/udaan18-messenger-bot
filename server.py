@@ -151,12 +151,15 @@ def message_handler(event):
             dept_list = dept.split('/')
             dept_list.append(raw_data['technical'][dept_idx]['alis'].lower())
             if dept == 'ec/el':
-                dept_list = ['electronics', 'communication', 'Sonic-A-Tronics', 'sonicatronics', 'sonic a tronics']
+                dept_list = ['electronics', 'communication', 'Sonic-A-Tronics', 'sonicatronics', 'sonic a tronics',
+                             'sonicatronics']
             if dept == 'computer/it':
-                dept_list = ['computer', 'information technology', 'coders squad', 'coders-squad', "coder's squad"]
+                dept_list = ['computer', 'information technology', 'coders squad', 'coders-squad', "coder's squad",
+                             'coderssquad']
             if dept == 'electrical':
                 dept_list.append("Dynamo-Bombers")
                 dept_list.append("dynamo bombers")
+                dept_list.append('dynamobombers')
             for mdept in dept_list:
                 if mdept.lower() in message.lower():
                     callback_picked_dept(payload='PICK_' + dept, event=event, data=data, raw_data=raw_data, page=page)
