@@ -149,12 +149,14 @@ def message_handler(event):
         # For displaying department events
         for dept_idx, dept in enumerate(data[1][data[0].index('technical')], 0):
             dept_list = dept.split('/')
-            dept_list.append(raw_data['technical'][dept_idx]['alis'])
+            dept_list.append(raw_data['technical'][dept_idx]['alis'].lower())
             if dept == 'ec/el':
-                dept_list = ['electronics', 'communication']
+                dept_list = ['electronics', 'communication', 'Sonic-A-Tronics', 'sonicatronics', 'sonic a tronics']
             if dept == 'computer/it':
-                dept_list = ['computer', 'information technology']
-
+                dept_list = ['computer', 'information technology', 'coders squad', 'coders-squad', "coder's squad"]
+            if dept == 'electrical':
+                dept_list.append("Dynamo-Bombers")
+                dept_list.append("dynamo bombers")
             for mdept in dept_list:
                 if mdept.lower() in message.lower():
                     callback_picked_dept(payload='PICK_' + dept, event=event, data=data, raw_data=raw_data, page=page)
