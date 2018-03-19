@@ -178,16 +178,28 @@ def message_handler(event):
                     callback_picked_category(payload='CATEGORY__' + category, event=event, data=data, raw_data=raw_data,
                                              page=page)
                 return
-        non_tech_keywords = ['non-tech', 'nontech']
+        non_tech_keywords = ['non-tech', 'nontech', 'pandora box', 'pandorabox']
         for non_tech_keyword in non_tech_keywords:
             if non_tech_keyword in message.lower():
                 callback_picked_category(payload='CATEGORY__non-technical', event=event, data=data, raw_data=raw_data,
                                          page=page)
                 return
-        if 'tech' in message.lower():
+        if 'tech' in message.lower() or 'department' in message.lower():
             callback_picked_category(payload='CATEGORY__technical', event=event, data=data, raw_data=raw_data,
                                      page=page)
             return
+        cultural_keywords = ['mad house', 'madhouse']
+        for cultural_keyword in cultural_keywords:
+            if cultural_keyword in message.lower():
+                callback_picked_category(payload='CATEGORY__cultural', event=event, data=data, raw_data=raw_data,
+                                         page=page)
+                return
+        adventure_keywords = ['Diagon Alley', 'diagonalley']
+        for adventure_keyword in adventure_keywords:
+            if adventure_keyword in message.lower():
+                callback_picked_category(payload='CATEGORY__adventure', event=event, data=data, raw_data=raw_data,
+                                         page=page)
+                return
 
         # Reach us
         for keyword in reach_us_list:

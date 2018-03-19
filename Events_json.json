@@ -5,6 +5,7 @@
       "participants": 1,
       "fees": 120,
       "notes": "-",
+      "alis": "Diagon Alley",
       "prizes": [
         0,
         0
@@ -1073,6 +1074,7 @@
       "name": "Cricket Fantasy",
       "participants": 2,
       "fees": 30,
+      "alis": "Pandora Box",
       "prizes": [
         0,
         0
@@ -1788,6 +1790,7 @@
       "name": "Fema Palooza",
       "participants": 1,
       "fees": 20,
+      "alis": "fab famina",
       "prizes": [
         0,
         0
@@ -1815,6 +1818,7 @@
       "name": "Bolly Mix Bolly",
       "participants": 2,
       "fees": 40,
+      "alis": "Mad House",
       "prizes": [
         0,
         0
