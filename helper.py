@@ -79,9 +79,12 @@ def callback_clicked_tech(payload, event, data, raw_data, page):
                                             image_url=CONFIG['UDAAN_URL']),
                     Template.GenericElement(title='Entry Fee: ', subtitle=event_raw_data['fees'])]
 
-    managers = [Template.ButtonPhoneNumber("Call Manager", "+91" + str(event_raw_data['managers'][i]['phone']))
-                for i in range(0, len(event_raw_data['managers'])) if i < 1]
-    send_str = round_str
+    if len(event_raw_data['managers']) == 0:  # If no manager exists
+        managers = None
+    else:
+        managers = [Template.ButtonPhoneNumber("Call Manager", "+91" + str(event_raw_data['managers'][i]['phone']))
+                    for i in range(0, len(event_raw_data['managers'])) if i < 1]
+        send_str = round_str
 
     page.send(sender_id, Template.List(
         elements=generic_list,
