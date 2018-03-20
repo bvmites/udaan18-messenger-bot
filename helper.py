@@ -7,7 +7,7 @@ from fbmq import QuickReply, Template
 def prepare_data():
     """
     Parses events JSON
-    :return: parsed JSON as a python dict, dict of menu items
+    :return: parsed JSON as a python dict, dict of menu items, dict of developers
     """
     raw = json.load(open('Events_json.json'))
     menu_data = []
@@ -39,11 +39,14 @@ def prepare_data():
         temp1_list.append(temp_list)
 
     menu_data.append(temp1_list)
-    return raw, menu_data
+
+    developers_data = json.load(open('developers.json'))
+    team_udaan_data = json.load(open('team_udaan.json'))
+    return raw, menu_data, developers_data, team_udaan_data
 
 
 def map_icon_list():
-    raw_data, data = prepare_data()
+    raw_data, data, developers_data, team_udaan_data = prepare_data()
     files_names_list = []
 
     for filename in glob.iglob('./logos/**/*.png', recursive=True):
@@ -121,7 +124,6 @@ def callback_clicked_other(payload, event, data, raw_data, page):
         elements=generic_list,
         top_element_style='large',
         buttons=managers
-
     ))
     page.send(sender_id, send_str)
 

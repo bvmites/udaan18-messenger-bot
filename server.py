@@ -16,7 +16,7 @@ ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 page = Page(ACCESS_TOKEN)
 
-raw_data, data = prepare_data()
+raw_data, data, developers_data, team_udaan_data = prepare_data()
 zipped = map_icon_list()
 page.show_starting_button("START_PAYLOAD")
 
@@ -98,6 +98,67 @@ def social_media_handle(message, sender_id):
     return 0
 
 
+def team_udaan_handler(event):
+    message = event.message_text
+    sender_id = event.sender_id
+    ge_list = []
+    team_categories = [team_udaan['category'] for team_udaan in team_udaan_data]
+    team_categories[team_categories.index('Technical')] = 'Tech Head'
+    team_udaan_key_list = ['teamudaan', 'team udaan', 'team-udaan', 'udaan team', 'udaanteam']
+    for z, category in enumerate(team_categories, 0):
+        if category.lower() in message.lower():
+            ge_list = [Template.GenericElement(title=team_udaan_data[z]['members'][i]['name'],
+                                               subtitle=team_udaan_data[z]['category'] + ' - '
+                                                        + team_udaan_data[z]['members'][i]['title'],
+                                               image_url=CONFIG['UDAAN_URL'],
+                                               buttons=[
+                                                   Template.ButtonPhoneNumber('Contact',
+                                                                              team_udaan_data[z]['members'][i][
+                                                                                  'mobile'])
+                                               ]) for i in range(0, len(team_udaan_data[z]['members']))]
+            page.send(sender_id, Template.Generic(ge_list))
+            return 1
+    for keyword in team_udaan_key_list:
+        if keyword.lower() in message.lower():
+            for z, category in enumerate(team_udaan_data, 0):
+                for member in category['members']:
+                    ge_list.append(Template.GenericElement(title=member['name'],
+                                                           subtitle=category['category'] + ' - ' + member['title'],
+                                                           image_url=CONFIG['UDAAN_URL'],
+                                                           buttons=[
+                                                               Template.ButtonPhoneNumber('Contact',
+                                                                                          member['mobile'])]))
+
+            page.send(sender_id, Template.Generic(ge_list[0:10]))
+            page.send(sender_id, Template.Generic(ge_list[10:20]))
+            page.send(sender_id, Template.Generic(ge_list[20:]))
+            return 1
+    return 0
+
+
+def developer_details_handler(event):
+    message = event.message_text
+    sender_id = event.sender_id
+    developer_list = ['developer', 'creator', 'created', 'maker']
+
+    ge_list = []
+    for developer in developers_data:
+        ge_list.append(Template.GenericElement(title=developer['name'],
+                                               subtitle=developer['category'].upper() + ' - ' + developer['title'],
+                                               image_url=CONFIG['UDAAN_URL'],
+                                               buttons=[
+                                                   Template.ButtonWeb(title='Github', url=developer['github']),
+                                                   Template.ButtonPhoneNumber(title='Contact',
+                                                                              payload=developer['mobile'])
+                                               ]))
+    for dev in developer_list:
+        if dev.lower() in message.lower():
+            page.send(sender_id, Template.Generic(ge_list[0:9]))
+            page.send(sender_id, Template.Generic(ge_list[9:]))
+            return 1
+    return 0
+
+
 @page.handle_message
 def message_handler(event):
     try:
@@ -111,6 +172,13 @@ def message_handler(event):
         categories_list = ['info', 'categories', 'category', 'details', 'event', 'events']
         reach_us_list = ['navigate', 'reach', 'map', 'bvm', 'birla', 'vishvakarma', 'mahavidyalaya', 'college']
 
+        # Handle Developer queries
+        if developer_details_handler(event) == 1:
+            return
+
+        # Handle Team Udaan queries
+        if team_udaan_handler(event) == 1:
+            return
         # Handle Social Media Queries
         if social_media_handle(message, sender_id) == 1:
             return
@@ -234,6 +302,7 @@ def message_handler(event):
     except Exception as e:
         print(e)
         page.send(event.sender_id, 'Hello')
+
 
 @page.callback(['CATEGORY__(.+)'])
 def callback_picked_genre(payload, event):
