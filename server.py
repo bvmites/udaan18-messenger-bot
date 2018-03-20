@@ -141,7 +141,6 @@ def message_handler(event):
                 if other_event.lower() in message.lower():
                     callback_clicked_other(payload='OTHER_' + other_event, event=event, data=data, raw_data=raw_data,
                                            page=page)
-
                     message_handled = 1
 
         if message_handled == 1:
@@ -153,7 +152,7 @@ def message_handler(event):
             dept_list.append(raw_data['technical'][dept_idx]['alis'].lower())
             if dept == 'ec/el':
                 dept_list = ['electronics', 'communication', 'Sonic-A-Tronics', 'sonicatronics', 'sonic a tronics',
-                             'sonicatronics']
+                             'sonicatronics', 'ec/el']
             if dept == 'computer/it':
                 dept_list = ['computer', 'information technology', 'coders squad', 'coders-squad', "coder's squad",
                              'coderssquad']
