@@ -108,7 +108,7 @@ def message_handler(event):
             return
 
         message_handled = 0
-        categories_list = ['info', 'categories', 'category', 'details']
+        categories_list = ['info', 'categories', 'category', 'details', 'event', 'events']
         reach_us_list = ['navigate', 'reach', 'map', 'bvm', 'birla', 'vishvakarma', 'mahavidyalaya', 'college']
 
         # Handle Social Media Queries
@@ -178,7 +178,7 @@ def message_handler(event):
                     callback_picked_category(payload='CATEGORY__' + category, event=event, data=data, raw_data=raw_data,
                                              page=page)
                 return
-        non_tech_keywords = ['non-tech', 'nontech', 'pandora box', 'pandorabox']
+        non_tech_keywords = ['non-tech', 'nontech', 'pandora box', 'pandorabox', 'non tech']
         for non_tech_keyword in non_tech_keywords:
             if non_tech_keyword in message.lower():
                 callback_picked_category(payload='CATEGORY__non-technical', event=event, data=data, raw_data=raw_data,
