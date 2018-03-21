@@ -79,7 +79,7 @@ def social_media_handle(message, sender_id):
         page.send(sender_id, Template.Generic([
             Template.GenericElement(title='Udaan18 Twitter',
                                     subtitle='The euphoric leap',
-                                    image_url=CONFIG['SOCIAL_BASE_LINK'] + 'twitter.png',
+                                    image_url=CONFIG['UDAAN_URL'],
                                     buttons=[
                                         Template.ButtonWeb('Visit', CONFIG['UDAAN_TWITTER'])
                                     ])
