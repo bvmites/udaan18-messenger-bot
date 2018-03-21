@@ -105,6 +105,34 @@ def team_udaan_handler(event):
     team_categories = [team_udaan['category'] for team_udaan in team_udaan_data]
     team_categories[team_categories.index('Technical')] = 'Tech Head'
     team_udaan_key_list = ['teamudaan', 'team udaan', 'team-udaan', 'udaan team', 'udaanteam']
+
+    gs_list = ['general secretary', 'gs']
+    lr_list = ['ladies representative', 'ladies\' representative', 'lr']
+
+    for gs_keyword in gs_list:
+        if message.lower() == gs_keyword.lower():
+            page.send(sender_id, Template.Generic([
+                Template.GenericElement(
+                    title=team_udaan_data[0]['members'][0]['name'],
+                    subtitle=team_udaan_data[0]['category'] + ' - '
+                             + str(team_udaan_data[0]['members'][0]['title']),
+                    image_url=CONFIG['UDAAN_URL'],
+                    buttons=[
+                        Template.ButtonPhoneNumber('Contact',
+                                                   team_udaan_data[0]['members'][0]['mobile'])])]))
+            return 1
+    for lr_keyword in lr_list:
+        if message.lower() == lr_keyword.lower():
+            page.send(sender_id, Template.Generic([
+                Template.GenericElement(
+                    title=team_udaan_data[0]['members'][1]['name'],
+                    subtitle=team_udaan_data[0]['category'] + ' - '
+                             + team_udaan_data[0]['members'][1]['title'],
+                    image_url=CONFIG['UDAAN_URL'],
+                    buttons=[
+                        Template.ButtonPhoneNumber('Contact',
+                                                   team_udaan_data[0]['members'][1]['mobile'])])]))
+            return 1
     for z, category in enumerate(team_categories, 0):
         if category.lower() in message.lower():
             ge_list = [Template.GenericElement(title=team_udaan_data[z]['members'][i]['name'],
