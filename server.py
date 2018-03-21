@@ -69,7 +69,7 @@ def social_media_handle(message, sender_id):
         page.send(sender_id, Template.Generic([
             Template.GenericElement(title='Udaan18 Instagram',
                                     subtitle='The euphoric leap',
-                                    image_url=CONFIG['UDAAN_URL'],
+                                    image_url=CONFIG['SOCIAL_BASE_LINK'] + 'instagram.png',
                                     buttons=[
                                         Template.ButtonWeb('Visit', CONFIG['UDAAN_INSTA'])
                                     ])
@@ -79,7 +79,7 @@ def social_media_handle(message, sender_id):
         page.send(sender_id, Template.Generic([
             Template.GenericElement(title='Udaan18 Twitter',
                                     subtitle='The euphoric leap',
-                                    image_url=CONFIG['UDAAN_URL'],
+                                    image_url=CONFIG['SOCIAL_BASE_LINK'] + 'twitter.png',
                                     buttons=[
                                         Template.ButtonWeb('Visit', CONFIG['UDAAN_TWITTER'])
                                     ])
@@ -89,7 +89,7 @@ def social_media_handle(message, sender_id):
         page.send(sender_id, Template.Generic([
             Template.GenericElement(title='Udaan18 Github',
                                     subtitle='The euphoric leap',
-                                    image_url=CONFIG['UDAAN_URL'],
+                                    image_url=CONFIG['SOCIAL_BASE_LINK'] + 'github.png',
                                     buttons=[
                                         Template.ButtonWeb('Visit', CONFIG['UDAAN_GITHUB'])
                                     ])

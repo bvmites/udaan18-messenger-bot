@@ -6,5 +6,6 @@ CONFIG = {
     'UDAAN_WEBSITE': 'https://udaan18.com/',
     'UDAAN_INSTA': 'https://instagram.com/teamudaan',
     'UDAAN_TWITTER': 'https://twitter.com/teamudaan',
-    'UDAAN_GITHUB': 'https://github.com/bvmites'
+    'UDAAN_GITHUB': 'https://github.com/bvmites',
+    'SOCIAL_BASE_LINK': 'https://raw.githubusercontent.com/bvmites/udaan18-messenger-bot/master/logos/'
 }
