@@ -133,6 +133,19 @@ def team_udaan_handler(event):
             page.send(sender_id, Template.Generic(ge_list[10:20]))
             page.send(sender_id, Template.Generic(ge_list[20:]))
             return 1
+
+    for z, category in enumerate(team_udaan_data, 0):
+        for member in category['members']:
+            if member['name'].lower() in message.lower():
+                page.send(sender_id, Template.Generic([Template.GenericElement(title=member['name'],
+                                                                               subtitle=category['category'] + ' - ' +
+                                                                                        member['title'],
+                                                                               image_url=CONFIG['UDAAN_URL'],
+                                                                               buttons=[
+                                                                                   Template.ButtonPhoneNumber('Contact',
+                                                                                                              member[
+                                                                                                                  'mobile'])])]))
+                return 1
     return 0
 
 
@@ -156,6 +169,24 @@ def developer_details_handler(event):
             page.send(sender_id, Template.Generic(ge_list[0:9]))
             page.send(sender_id, Template.Generic(ge_list[9:]))
             return 1
+
+    # Individual Name Cards
+    for developer in developers_data:
+        if developer['name'].lower() in message.lower():
+            page.send(sender_id, Template.Generic([Template.GenericElement(title=developer['name'],
+                                                                           subtitle=developer[
+                                                                                        'category'].upper() + ' - ' +
+                                                                                    developer['title'],
+                                                                           image_url=CONFIG['UDAAN_URL'],
+                                                                           buttons=[
+                                                                               Template.ButtonWeb(title='Github',
+                                                                                                  url=developer[
+                                                                                                      'github']),
+                                                                               Template.ButtonPhoneNumber(
+                                                                                   title='Contact',
+                                                                                   payload=developer['mobile'])
+                                                                           ])]))
+            return 1
     return 0
 
 
@@ -170,7 +201,7 @@ def message_handler(event):
 
         message_handled = 0
         categories_list = ['info', 'categories', 'category', 'details', 'event', 'events']
-        reach_us_list = ['navigate', 'reach', 'map', 'bvm', 'birla', 'vishvakarma', 'mahavidyalaya', 'college']
+        reach_us_list = ['navigate', 'reach', 'map', 'bvm', 'birla', 'vishvakarma', 'mahavidyalaya', 'college', 'where']
 
         # Handle Developer queries
         if developer_details_handler(event) == 1:
