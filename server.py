@@ -104,6 +104,7 @@ def team_udaan_handler(event):
     ge_list = []
     team_categories = [team_udaan['category'] for team_udaan in team_udaan_data]
     team_categories[team_categories.index('Technical')] = 'Tech Head'
+    team_categories[team_categories.index('Cultural')] = 'Cultural Head'
     team_udaan_key_list = ['teamudaan', 'team udaan', 'team-udaan', 'udaan team', 'udaanteam']
 
     gs_list = ['general secretary', 'gs']
