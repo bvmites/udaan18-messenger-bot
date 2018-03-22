@@ -232,6 +232,9 @@ def message_handler(event):
         categories_list = ['info', 'categories', 'category', 'details', 'event', 'events']
         reach_us_list = ['navigate', 'reach', 'map', 'bvm', 'birla', 'vishvakarma', 'mahavidyalaya', 'college', 'where']
 
+        user_profile = page.get_user_profile(event.sender_id)
+        print(user_profile)
+
         # Handle Developer queries
         if developer_details_handler(event) == 1:
             return
@@ -249,8 +252,8 @@ def message_handler(event):
         if ('where' in message.lower() and 'udaan' in message.lower()) or message.lower() == 'where':
             click_persistent_menu(payload='PMENU_' + 'map', event=event)
             return
-        if message.lower() in 'hey hello hi there hey there':
-            page.send(sender_id, 'Hey there! How you doing?')
+        if message.lower() in 'hey hello hi there hey there heyy heyyy heyyyy':
+            page.send(sender_id, 'Hey ' + user_profile['first_name'] + '! How you doing?')
             start_callback('START_PAYLOAD', event=event)
             return
         # For handling inputs related to tech events
