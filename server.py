@@ -370,6 +370,7 @@ def message_handler(event):
                        '9. Or just have a normal conversation with bot. Type in anything\n' \
                        'Enjoy!!'
             page.send(sender_id, help_msg)
+            return
         bot_input = chatterbot.get_response(message)
         if 'do you feel' in str(bot_input).lower():
             page.send(sender_id, 'Good')
