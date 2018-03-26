@@ -27,9 +27,9 @@ page.show_persistent_menu([Template.ButtonPostBack('Information', 'PMENU_' + 'In
 @page.callback(['START_PAYLOAD'])
 def start_callback(payload, event):
     page.send(event.sender_id, "Welcome to Udaan 2018! Write down info to get information about various events.")
-
-    page.send(event.sender_id, "Find details of individuals events: \"Give me details of Hardwizard \"")
-    page.send(event.sender_id, "Find list of events: \"tech events\"")
+    page.send(event.sender_id, "If you are new to this bot, type \'help\' to get instructions.")
+    # page.send(event.sender_id, "Find details of individuals events: \"Give me details of Hardwizard \"")
+    # page.send(event.sender_id, "Find list of events: \"tech events\"")
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -356,6 +356,20 @@ def message_handler(event):
         if 'fine' in message.lower():
             page.send(sender_id, 'Good')
             return
+        # For help
+        if 'help' in message.lower():
+            help_msg = 'Instructions:\n' \
+                       '1. For all events: \'Give me details of all events\'\n' \
+                       '2. You can be specific: \'Cultural Events\'\n' \
+                       '3. Specific Event details: \'Give details of hardwizard\'\n' \
+                       '4. Team Udaan: \'Team Udaan\'\n' \
+                       '5. Developers: \'Developers\'\n' \
+                       '6. Look for a specific person\'Who is Jatan Patel\'\n' \
+                       '7. To reach us: \'Reach BVM\'\n' \
+                       '8. Get info about specific pages: \'Udaan insta\'\n' \
+                       '9. Or just have a normal conversation with bot. Type in anything\n' \
+                       'Enjoy!!'
+            page.send(sender_id, help_msg)
         bot_input = chatterbot.get_response(message)
         if 'do you feel' in str(bot_input).lower():
             page.send(sender_id, 'Good')
