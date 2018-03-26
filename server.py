@@ -364,7 +364,7 @@ def message_handler(event):
                        '3. Specific Event details: \'Give details of hardwizard\'\n' \
                        '4. Team Udaan: \'Team Udaan\'\n' \
                        '5. Developers: \'Developers\'\n' \
-                       '6. Look for a specific person\'Who is Jatan Patel\'\n' \
+                       '6. Look for a specific person: \'Who is Jatan Patel\'\n' \
                        '7. To reach us: \'Reach BVM\'\n' \
                        '8. Get info about specific pages: \'Udaan insta\'\n' \
                        '9. Or just have a normal conversation with bot. Type in anything\n' \
