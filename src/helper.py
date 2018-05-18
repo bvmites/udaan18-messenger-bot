@@ -9,7 +9,7 @@ def prepare_data():
     Parses events JSON
     :return: parsed JSON as a python dict, dict of menu items, dict of developers
     """
-    raw = json.load(open('Events_json.json'))
+    raw = json.load(open('./data/Events_json.json'))
     menu_data = []
     temp_list = []
 
@@ -40,8 +40,8 @@ def prepare_data():
 
     menu_data.append(temp1_list)
 
-    developers_data = json.load(open('developers.json'))
-    team_udaan_data = json.load(open('team_udaan.json'))
+    developers_data = json.load(open('./data/developers.json'))
+    team_udaan_data = json.load(open('./data/team_udaan.json'))
     return raw, menu_data, developers_data, team_udaan_data
 
 
@@ -49,7 +49,7 @@ def map_icon_list():
     raw_data, data, developers_data, team_udaan_data = prepare_data()
     files_names_list = []
 
-    for filename in glob.iglob('./logos/**/*.png', recursive=True):
+    for filename in glob.iglob('./data/logos/**/*.png', recursive=True):
         files_names_list.append('https://raw.githubusercontent.com/bvmites/udaan18-messenger-bot/master' + filename[1:])
     event_names_list = []
     # All dept events

@@ -5,8 +5,8 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 from fbmq import Page
 from flask import Flask, request
 
-from CONFIG import CONFIG
-from helper import *
+from src.CONFIG import CONFIG
+from src.helper import *
 
 chatterbot = ChatBot("Training Example")
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
